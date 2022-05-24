@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,20 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private platform: Platform, private geolocation: Geolocation) {
+    platform.ready().then(() => {
+
+      // get current position
+      geolocation.getCurrentPosition(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+      });
+
+      const watch = geolocation.watchPosition(pos => {
+        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+      });
+
+      console.log('watch', watch);
+    });
+  }
 
 }
