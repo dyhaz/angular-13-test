@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Platform } from "@ionic/angular";
+import { Platform } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,19 @@ export class HomePage {
     platform.ready().then(() => {
 
       // get current position
-      geolocation.getCurrentPosition(pos => {
+      geolocation.getCurrentPosition().then((pos) => {
         console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
       });
 
-      const watch = geolocation.watchPosition(pos => {
-        console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+      const watch = geolocation.watchPosition().subscribe((pos: any) => {
+        if (pos.coords) {
+          console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+        }
       });
 
-      console.log('watch', watch);
+      // to stop watching
+      watch.unsubscribe();
+
     });
   }
 
