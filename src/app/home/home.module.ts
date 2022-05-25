@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { GdCompButtonModule } from "@greatday/components";
+import { GdCompButtonModule, GdCompDatepickerModule } from "@greatday/components";
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import { GdCompButtonModule } from "@greatday/components";
         FormsModule,
         IonicModule,
         HomePageRoutingModule,
-        GdCompButtonModule
+        GdCompButtonModule,
+        GdCompDatepickerModule
     ],
   declarations: [HomePage]
 })
