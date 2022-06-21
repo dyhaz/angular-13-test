@@ -1,9 +1,11 @@
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import { BaseApi, RequestMethod } from "./base.api";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpErrorResponse } from "@angular/common/http";
 import { IonicModule } from "@ionic/angular";
 import { CommonModule } from "@angular/common";
 import { firstValueFrom } from "rxjs";
+import { HttpErrorInterceptor } from "./httperrorinterceptor.service";
+// import { ResponseInterceptor } from "./httpresponseinterceptor.service";
 
 describe('AppComponent', () => {
   let app: BaseApi;
@@ -13,6 +15,16 @@ describe('AppComponent', () => {
       declarations: [
       ],
       providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: HttpErrorInterceptor,
+          multi: true
+        },
+        // {
+        //   provide: HTTP_INTERCEPTORS,
+        //   useClass: ResponseInterceptor,
+        //   multi: true
+        // }
       ],
       imports: [
         CommonModule,
@@ -27,7 +39,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
     const response = await firstValueFrom(app.request({
       params: {},
-      url: "http://localhost:4554",
+      url: "https://jsonplaceholder.typicode.com/todos/1",
       timeout: 1000,
       method: RequestMethod.GET
     }));

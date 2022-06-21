@@ -41,7 +41,7 @@ export class BaseApi {
 
     switch (data?.method) {
       case RequestMethod.GET:
-        return this.http.get<T>(`${data?.url}`, { headers });
+        return this.http.request<T>(RequestMethod.GET, `${data?.url}`, { headers });
       case RequestMethod.POST:
         return this.http.post<T>(`${data?.url}`, data?.params || {}, { headers });
       case RequestMethod.DELETE:
