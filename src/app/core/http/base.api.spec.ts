@@ -5,7 +5,7 @@ import { IonicModule } from "@ionic/angular";
 import { CommonModule } from "@angular/common";
 import { firstValueFrom } from "rxjs";
 import { HttpErrorInterceptor } from "./httperrorinterceptor.service";
-// import { ResponseInterceptor } from "./httpresponseinterceptor.service";
+import { ResponseInterceptor } from "./httpresponseinterceptor.service";
 
 describe('AppComponent', () => {
   let app: BaseApi;
@@ -20,11 +20,11 @@ describe('AppComponent', () => {
           useClass: HttpErrorInterceptor,
           multi: true
         },
-        // {
-        //   provide: HTTP_INTERCEPTORS,
-        //   useClass: ResponseInterceptor,
-        //   multi: true
-        // }
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: ResponseInterceptor,
+          multi: true
+        }
       ],
       imports: [
         CommonModule,
@@ -39,7 +39,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
     const response = await firstValueFrom(app.request({
       params: {},
-      url: "https://jsonplaceholder.typicode.com/todos/1",
+      url: "https://gitlab.com/assets/",
       timeout: 1000,
       method: RequestMethod.GET
     }));
