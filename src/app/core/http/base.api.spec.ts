@@ -79,7 +79,8 @@ describe('AppComponent', () => {
         // body: data?.params
       });
 
-      console.log('output value:', JSON.stringify(response?.status));
+      console.log('url:', response.url)
+      console.log('status:', response.status);
     } catch (e) {
       // console.log('error', e);
     }
