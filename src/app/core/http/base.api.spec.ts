@@ -39,7 +39,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
     const response = await firstValueFrom(app.request({
       params: {},
-      url: "https://jsonplaceholder.typicode.com/todos/1",
+      url: "http://localhost:3000/dummy/500",
       timeout: 1000,
       method: RequestMethod.GET
     }));
@@ -50,7 +50,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
     let data = {
       params: {},
-      url: "http://localhost:3000/dummy",
+      url: "http://localhost:3000/dummy/500",
       timeout: 1000,
       method: RequestMethod.GET
     };
@@ -82,7 +82,7 @@ describe('AppComponent', () => {
       console.log('url:', response.url)
       console.log('status:', response.status);
     } catch (e) {
-      // console.log('error', e);
+      console.log('error', e);
     }
   });
 });
